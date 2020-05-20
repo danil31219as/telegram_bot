@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 from telegraph.api import Telegraph
-from config import *
 import requests
 import telebot
 
@@ -41,7 +40,7 @@ def make_telegraph(token, title, photo, photo_text, main_text):
     return href
 
 
-bot = telebot.TeleBot(token_bot)
+bot = telebot.TeleBot('1106884691:AAHxW_QkU1PT3hlZfcuuUBuDwo-esplvWx4')
 
 
 @bot.message_handler(commands=['start'])
@@ -53,6 +52,7 @@ def start_message(message):
 def send_text(message):
     if message.chat.id == 236831339:
         url = message.text
+        token = 'e05180aaf37d7293ad9bfc1e3df510b7b6adc642e685da38f8068a222d8d'
         soup = BeautifulSoup(
             requests.get(url, headers={'User-Agent': 'Mozilla/5.0'}).text,
             'html.parser')

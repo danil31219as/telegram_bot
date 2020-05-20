@@ -6,7 +6,7 @@ import os
 
 bot_token = os.environ.get('bot_token')
 token = os.environ.get('token')
-user_id = int(os.environ.get('id'))
+
 
 
 def make_telegraph(token, title, photo, photo_text, main_text):
@@ -55,7 +55,7 @@ def start_message(message):
 
 @bot.message_handler(content_types=['text'])
 def send_text(message):
-    if message.chat.id == user_id:
+    if message.chat.id == 236831339:
         try:
             url = message.text
 
@@ -75,7 +75,7 @@ def send_text(message):
                                  href['url']),
                              parse_mode='HTML')
         except Exception:
-            bot.send_message(user_id, 'Что-то пошло не так')
+            bot.send_message(236831339, 'Что-то пошло не так')
     else:
         bot.send_message(message.chat.id, 'Не подчиняюсь')
 

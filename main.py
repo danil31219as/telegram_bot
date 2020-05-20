@@ -55,22 +55,26 @@ def start_message(message):
 @bot.message_handler(content_types=['text'])
 def send_text(message):
     if message.chat.id == 236831339:
-        url = message.text
+        try:
+            url = message.text
 
-        soup = BeautifulSoup(
-            requests.get(url, headers={'User-Agent': 'Mozilla/5.0'}).text,
-            'html.parser')
-        title = soup.find_all('h1')[0].text
-        desc_tlg = soup.find('div', class_='detail-anons').text
-        photo = 'https://www.menslife.com' + \
-                soup.find('div', class_='detail-image').find('img')['src']
-        photo_text = soup.find('div', class_='detail-image').find('img')['alt']
-        main_text = soup.find('div', class_='detail-text').text
-        href = make_telegraph(token, title, photo, photo_text, main_text)
-        bot.send_message(-1001107192388,
-                         "<strong>" + title + "</strong>\n\n" + desc_tlg.strip() + "\n\n" + str(
-                             href['url']),
-                         parse_mode='HTML')
+            soup = BeautifulSoup(
+                requests.get(url, headers={'User-Agent': 'Mozilla/5.0'}).text,
+                'html.parser')
+            title = soup.find_all('h1')[0].text
+            desc_tlg = soup.find('div', class_='detail-anons').text
+            photo = 'https://www.menslife.com' + \
+                    soup.find('div', class_='detail-image').find('img')['src']
+            photo_text = soup.find('div', class_='detail-image').find('img')[
+                'alt']
+            main_text = soup.find('div', class_='detail-text').text
+            href = make_telegraph(token, title, photo, photo_text, main_text)
+            bot.send_message(-1001107192388,
+                             "<strong>" + title + "</strong>\n\n" + desc_tlg.strip() + "\n\n" + str(
+                                 href['url']),
+                             parse_mode='HTML')
+        except Exception:
+            bot.send_message(236831339, 'Что-то пошло не так')
     else:
         bot.send_message(message.chat.id, 'Не подчиняюсь')
 

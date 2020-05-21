@@ -32,7 +32,7 @@ def make_telegraph(token, title, photo, photo_text, main_text):
     tag = del_tag(tag, '/div')
     tag = add_src(tag)
     return session.create_page(title=title, author_name='@muzhik_zdorov',
-                               html_content=tag[:-3])
+                               html_content=tag.strip()[:-5].rstrip('<').rstrip('<<br>'))
 
 
 bot = telebot.TeleBot(bot_token)

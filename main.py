@@ -31,11 +31,8 @@ def make_telegraph(token, title, photo, photo_text, main_text):
     tag = str(photo) + '\n' + tag
     tag = del_tag(tag, '/div')
     tag = add_src(tag)
-    tag += '<br><a href="https://t.me/joinchat/JTVAx0pTnkjvH75UTArwTg" target="_balnk">Наш чат</a><br>'
-    tag += '<p>Telegram-канал </p>'
-    tag += '<a href="https://t.me/muzhik_zdorov>"><strong>Мужское здоровье - <em>@muzhik_zdorov</em></strong></a>'
     return session.create_page(title=title, author_name='@muzhik_zdorov',
-                               html_content=tag)
+                               html_content=tag[:-3])
 
 
 bot = telebot.TeleBot(bot_token)
